@@ -4,7 +4,7 @@ Steps to install my project:
 
 2.Open XAMPP Control panal and start [apache] and [mysql] .
 
-3.Download project from github(https://github.com/PuneethReddyHC/online-shopping-system-with-advanced-admin-page.git)
+3.Download project from github(https://github.com/prabh123456/gameswebsite.git)
 
 4.extract files in C:\xampp\htdocs.
 
