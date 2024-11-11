@@ -16,7 +16,7 @@ Steps to install my project:
 
 8.after creating database name click on import.
 
-9.browse the file in directory[online-shopping-system-with-advanced-admin-page/database/onlineshop.sql].
+9.browse the file in file job_portal.sql and join.sql.
 
 10.after importing successfully.
 
