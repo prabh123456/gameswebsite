@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hangman Game</title>
+    <link rel="stylesheet" href="gme3.css">
+</head>
+<body>
+    <div class="head">
+        <p class="p">Hangman Game</p>
+    <audio id="background-music" loop src="sound.mp3"></audio>
+    <audio id="click-music" src="click.mp3"></audio>
+    <audio id="win-sound" src="win.mp3"></audio>
+    <audio id="loss-sound" src="loss.mp3"></audio>
+    <audio id="pop" src="pop.mp3"></audio>
+    <audio id="coin" src="coin.mp3"></audio>
+    <audio id="start-sound" src="start.mp3"></audio>
+    </div>
+
+    <div id="play-now-container">
+        <button id="play-now" onclick="startGame1()">Play Now</button>
+    </div>
+        
+    <div class="box">
+        <img src="../gme3/images/hangman-0.svg" draggable="false" alt="hangman-img">
+        <div class="content">
+            <div class="wordcnt">
+                <div id="word"></div>
+            </div>
+            <div class="hintcnt">
+                <div id="hint"></div>
+            </div>
+            <div class="incorrectcnt">
+                <div id="incorrect"></div>
+            </div>
+            <div id="btncreate"></div>
+        </div>
+    </div>
+    
+
+        <div id="gameover-popup" class="popup-container">
+            <div class="popup-content">
+                <button class="close-btn" onclick="closeModal()">X</button>
+                <p id="game-message"></p>
+                <div id="button-row">
+                    <button id="ok-button" onclick="ok()">NEXT</button>
+                </div>
+            </div>
+        </div>
+
+    <script src="gme3.js"></script>
+</body>
+</html>

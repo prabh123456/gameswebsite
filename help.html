@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="help.css">
+</head>
+<body>
+    <nav class="">
+        <div class="h22">GameGalaxy..</div>
+        <ul class="">
+            <li><a href="../hero/index.php" class="">Home</a></li>
+            <li><a href="../hero/index.php" class="">Games</a></li>
+            <li><a href="../help/help.html" class="active">Help</a></li>
+            <li><a href="../careers/career.php" class="">Careers</a></li>
+        </ul>
+    </nav>
+    <audio id="click" src="click.mp3"></audio>
+
+   
+    <h2>FAQ'S</h2>
+    <div class="accordian">
+    </div>
+
+
+    <footer class="footer">
+        <div class="footer-content">
+            <p>Contact us at: <a href="mailto:kaurprabh6698@gmail.com">kaurprabh6698@gmail.com</a></p>
+            <p>Created by Prabhjot Kaur</p>
+            <p>© 2024 GameGalaxy. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+      let accordian=document.querySelector('.accordian');
+      let click=document.getElementById('click');
+        const ques=[
+            {
+                ques:"What are the system requirements to play the games on your site?",
+                ans:"The system requirements vary by game. Generally, you'll need a modern web browser, a stable internet connection, and a device with at least 4GB of RAM."
+            },
+            {
+                ques:"How can I reset my game progress?",
+                ans:"To reset your game progress, go to the game's settings or options menu and look for a 'Reset Progress' button.",
+            },
+            {
+                ques:"Can I play games without an internet connection?",
+                ans:"Most of our games require an internet connection to function properly. However, some games are designed to be played offline.",
+            },{
+                ques:"Are your games free to play?",
+                ans:"Yes, all of our games are free to play.",
+            },
+            {
+                ques:"How do I report a bug or issue in a game?",
+                ans:"If you encounter a bug or issue, please contact our support team through the 'Contact Us' page on our website.",
+            },
+            {
+                ques:"Can I play your games on mobile devices?",
+                ans:"Yes, many of our games are compatible with mobile devices.",
+            },
+            {
+                ques:"Is there a multiplayer mode available in any of the games?",
+                ans:"Some of our games offer multiplayer modes where you can compete or cooperate with other players.",
+            },
+        ]
+        function displayfaqs(){
+        ques.forEach(que=>{
+           let box=document.createElement('div');
+           box.classList.add('container');
+           box.innerHTML=`
+           <div class="question">
+            ${que.ques}
+            </div>
+            <div class="answer">
+                ${que.ans}
+                </div>
+           `;
+           accordian.appendChild(box);
+
+           box.addEventListener('click', () => {
+            document.querySelectorAll('.container').forEach(container => {
+                if (container !== box) {
+                    container.classList.remove('active');
+                }
+            });
+            click.play();
+            box.classList.toggle('active');
+           });
+        });
+    }
+        
+    
+    displayfaqs();
+    </script>
+ 
+</body>
+</html>

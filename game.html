@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/12d0f0e6fa.js" crossorigin="anonymous"></script>
+    <title>Tic-Tac-Toe</title>
+    <link rel="stylesheet" href="game.css">
+</head>
+<body>
+    <div class="head">
+        <p>Tic-Tac-Toe</p>
+        <audio id="background-music" loop src="sound.mp3" loop></audio>
+        <audio id="click-music" src="click.mp3"></audio>
+        <audio id="win-sound" src="win.mp3"></audio>
+        <audio id="loss-sound" src="loss.mp3"></audio>
+        <audio id="pop" src="pop.mp3"></audio>
+        <i onClick="toggleVolume(); press()" id="volumeoff" class="sound fa-solid fa-volume-xmark"></i>
+        <i onClick="toggleVolume(); press()" id="volumeon" class="sound fa-solid fa-volume-high"></i>
+    </div>
+    <div class="container1">
+        <div class="turn-indicator" id="turnIndicator"></div>
+        <div class="grid"></div>
+        <div id="winnerDisplay" class="winner-display">
+            <span id="winnerText"></span>
+        </div>
+        <button onClick="playAgain()" class="btnplay" id="playAgainBtn">Play Again</button>
+    </div>
+
+    <script>
+        let currentPlayer = "X";
+        let isUserTurn = true;
+        let arr;
+        let gameEnded = false;
+        let audio = document.getElementById('background-music');
+            let vlmoff = document.getElementById('volumeoff');
+            let vlmon = document.getElementById('volumeon');
+            let volumeState = localStorage.getItem('volume');
+        const turnIndicator = document.getElementById('turnIndicator');
+        const winnerDisplay = document.getElementById('winnerDisplay');
+        const playAgainBtn = document.getElementById('playAgainBtn');
+        const player = localStorage.getItem('players') || '1';
+        let size = parseInt(localStorage.getItem('gridSize')) || 3;
+        const clickAudio = document.getElementById('click-music');
+        const winSound = document.getElementById('win-sound');
+        const lossSound = document.getElementById('loss-sound');
+        
+        window.onload = function() {
+            if (volumeState === 'off') {
+                audio.muted = true;
+                vlmoff.style.display = 'block';
+                vlmon.style.display = 'none';
+                
+            } if(volumeState === 'on') {
+                audio.muted = false;
+                vlmoff.style.display = 'none';
+                vlmon.style.display = 'block';
+                audio.play();
+            }
+        };
+
+        function toggleVolume() {
+            if (audio.muted) {
+                audio.muted = false;
+                vlmoff.style.display = 'none';
+                vlmon.style.display = 'block';
+                audio.play();
+                localStorage.setItem('volume', 'on'); 
+            } else {
+                audio.muted = true;
+                vlmoff.style.display = 'block';
+                vlmon.style.display = 'none';
+                localStorage.setItem('volume', 'off'); 
+            }
+        }
+
+        function press() {
+            clickAudio.play();
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            arr = Array(size * size).fill(null);
+            createGrid(size);
+            updateTurnIndicator();
+        });
+
+        const gridElement = document.querySelector('.grid');
+
+        function createGrid(size) {
+            gridElement.innerHTML = '';
+            for (let i = 0; i < size; i++) {
+                const row = document.createElement('div');
+                row.classList.add('row');
+                for (let j = 0; j < size; j++) {
+                    const col = document.createElement('div');
+                    col.classList.add('col');
+                    col.setAttribute('id', i * size + j);
+                    col.addEventListener('click', () => handleClick(col));
+                    row.appendChild(col);
+                }
+                gridElement.appendChild(row);
+            }
+        }
+
+        function checkWinner() {
+            // Check rows
+            for (let i = 0; i < size; i++) {
+                let rowWin = true;
+                for (let j = 1; j < size; j++) {
+                    if (arr[i * size + j] !== arr[i * size] || arr[i * size] === null) {
+                        rowWin = false;
+                        break;
+                    }
+                }
+                if (rowWin) return declareWinner(arr[i * size]);
+            }
+
+            // Check columns
+            for (let i = 0; i < size; i++) {
+                let colWin = true;
+                for (let j = 1; j < size; j++) {
+                    if (arr[j * size + i] !== arr[i] || arr[i] === null) {
+                        colWin = false;
+                        break;
+                    }
+                }
+                if (colWin) return declareWinner(arr[i]);
+            }
+
+            // Check first diagonal
+            let diag1Win = true;
+            for (let i = 1; i < size; i++) {
+                if (arr[i * size + i] !== arr[0] || arr[0] === null) {
+                    diag1Win = false;
+                    break;
+                }
+            }
+            if (diag1Win) return declareWinner(arr[0]);
+
+            // Check second diagonal
+            let diag2Win = true;
+            for (let i = 1; i < size; i++) {
+                if (arr[i * size + (size - 1 - i)] !== arr[size - 1] || arr[size - 1] === null) {
+                    diag2Win = false;
+                    break;
+                }
+            }
+            if (diag2Win) return declareWinner(arr[size - 1]);
+
+            // Check for draw
+            if (!arr.some((e) => e === null)) {
+                winnerDisplay.classList.add('active');
+                playAgainBtn.classList.add('active');
+                winnerDisplay.innerHTML = 'Draw!!';
+                gameEnded = true;
+                return true;
+            }
+            return false;
+        }
+
+        function declareWinner(winner) {
+            let pop=document.getElementById('pop');
+            pop.play();
+            winnerDisplay.classList.add('active');
+            playAgainBtn.classList.add('active');
+            turnIndicator.classList.add('remove');
+            
+            if (player === '1') {
+                if (isUserTurn) {
+                    winnerDisplay.innerHTML = 'Congrats!! You Won the Game';
+                    winSound.play();
+                } else {
+                    winnerDisplay.innerHTML = 'Oops!! You Lost the Game';
+                    lossSound.play();
+                }
+            } else if (player === '2') {
+                winnerDisplay.innerHTML = 'Congrats!! Player ' + (winner === 'X' ? '1' : '2') + ' Won the Game';
+            }
+            gameEnded = true;
+        }
+
+        function handleClick(el) {
+            const id = Number(el.id);
+            if (arr[id] !== null || gameEnded) return;
+
+            press();
+            arr[id] = currentPlayer;
+            el.innerText = currentPlayer;
+
+            if (checkWinner()) {
+                return;
+            }
+
+            currentPlayer = currentPlayer === "X" ? "O" : "X";
+            isUserTurn = !isUserTurn;
+
+            if (player === '1' && !isUserTurn) {
+                setTimeout(simulateAutomaticPlayerTurn, 700);
+            }
+            updateTurnIndicator();
+        }
+
+        function simulateAutomaticPlayerTurn() {
+            if (gameEnded || isUserTurn) return;
+
+            let emptyCells = arr.map((value, index) => value === null ? index : -1).filter(index => index !== -1);
+            let randomIndex = emptyCells[Math.floor(Math.random() * emptyCells.length)];
+
+            arr[randomIndex] = currentPlayer;
+            document.getElementById(randomIndex.toString()).innerText = currentPlayer;
+
+            if (checkWinner()) {
+                return;
+            }
+
+            currentPlayer = currentPlayer === "X" ? "O" : "X";
+            isUserTurn = true;
+            updateTurnIndicator();
+        }
+
+        function updateTurnIndicator() {
+            if (player === '2') {
+                turnIndicator.innerText = isUserTurn ? "Player 1's Turn" : "Player 2's Turn";
+            } else {
+                turnIndicator.innerText = isUserTurn ? "Your Turn" : "Computer's Turn";
+            }
+        }
+
+        function playAgain() {
+            location.reload();
+        }
+    </script>
+</body>
+</html>
+
+

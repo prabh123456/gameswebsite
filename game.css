@@ -1,0 +1,122 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: linear-gradient(to right, #59aae8, #7fc5fa, #a5d7fe);
+}
+.head {
+    display: flex;
+    justify-content: space-between;
+}
+
+p {
+    font-weight: bolder;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    margin: auto;
+    font-size: 2em;
+    position: absolute;
+    color: rgb(244, 244, 84);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    border: 2px solid white; 
+    padding: 10px; 
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    left: 20px;
+    top: 20px;
+}
+
+.container1 {
+    margin-top: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.grid {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.row {
+    display: flex;
+}
+.col {
+    height: 100px;
+    width: 100px;
+    border: 4px solid white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 40px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+.col:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+}
+.turn-indicator {
+    margin-top: 20px;
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    background-color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 15px;
+}
+.remove {
+    display: none;
+}
+.winner-display {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    background-color: rgba(253, 250, 250, 0.9);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    display: none;
+    font-size: 1em;
+    z-index: 1;
+    backdrop-filter: blur(8px);
+}
+.winner-display.active {
+    display: block;
+}
+.btnplay {
+    height: 50px;
+    width: 120px;
+    border-radius: 5px;
+    display: none;
+    margin-top: 20px;
+    font-size: 1em;
+}
+.btnplay.active {
+    display: block;
+}
+#volumeon {
+    font-size: 20px;
+    color: white;
+    position: absolute;
+    top: 20px; 
+    right: 20px;
+    cursor: pointer;
+    display: block;
+}
+#volumeoff {
+    font-size: 20px;
+    color: white;
+    position: absolute;
+    top: 20px; 
+    right: 20px;
+    cursor: pointer;
+    display: none;
+}

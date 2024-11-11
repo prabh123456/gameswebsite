@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/12d0f0e6fa.js" crossorigin="anonymous"></script>
+    <title>Animated Snakes</title>
+    <link rel="stylesheet" href="gme1.css">
+</head>
+<body>
+    <div class="head">
+        <p class="p" >Classic Snake</p>
+        <audio id="background-music" loop src="sound.mp3"></audio>
+        <audio id="click-music" src="click.mp3"></audio>
+        <audio id="loss-sound" src="loss.mp3"></audio>
+        <audio id="start-sound" src="start.mp3"></audio>
+        <audio id="coin-sound" src="coin.mp3"></audio>
+        <audio id="pop-sound" src="pop.mp3"></audio>
+        <i onclick="toggleVolume()" id="volumeoff" class="sound fa-solid fa-volume-xmark"></i>
+        <i onclick="toggleVolume()" id="volumeon" class="sound fa-solid fa-volume-high"></i>
+    </div>
+
+    <div class="cnt1" id="cnt1">
+        <div class="container">
+            <div id="board">
+                <button class="btn" id="btn" onclick="openCnt()">Play Now!</button>
+                <img class="img3" src="https://cdn.pixabay.com/photo/2013/07/13/13/42/snake-161424_960_720.png" alt="Snake Image">
+            </div>
+        </div>
+    </div>
+  
+        <div id="gameover-popup" class="popup-container">
+            <div class="popup-content">
+                <button class="close-btn" onclick="closeModal()">X</button>
+                <p>Oops, you lost the game. If you want to continue, press OK.</p>
+                <div id="button-row">
+                    <button id="score">Score:0</button>
+                    <button id="ok-button" onclick="ok()">OK</button>
+                </div>
+                
+            </div>
+</div>
+
+    <script src="gme1.js"></script>
+</body>
+</html>
+
+

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic-Tac-Toe</title>
+    <script src="https://kit.fontawesome.com/12d0f0e6fa.js" crossorigin="anonymous"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-image: linear-gradient(to right, #59aae8, #7fc5fa, #a5d7fe);
+            position: relative;
+        }
+        .head {
+            font-weight: bolder;
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            animation: movehead 1s linear forwards;
+            margin: auto;
+            font-size: 2em;
+            position: absolute;
+            color: rgb(244, 244, 84);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            border: 2px solid white; 
+            padding: 10px; 
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        @keyframes movehead {
+            0% {
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%) scale(4);
+            }
+            100% {
+                top: 20px;
+                left: 20px;
+                transform: translate(0, 0) scale(1);
+            }
+        }
+        .container {
+            height: 500px;
+            width: 400px;
+            text-align: center;
+            background-image: url('https://thumbs.dreamstime.com/b/ox-tic-tac-toe-wood-board-game-using-as-background-business-di-direction-planning-concept-vintage-tone-121331132.jpg');
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 1s ease;
+            position:relative;
+        }
+        .container.show {
+            opacity: 1;
+        }
+        #volumeon {
+            font-size: 20px;
+            color: white;
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            cursor: pointer;
+            display: block;
+        }
+        #volumeoff {
+            font-size: 20px;
+            color: white;
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            cursor: pointer;
+            display: none;
+        }
+        .btn {
+            display: block;
+            margin: 10px auto;
+            padding: 15px 25px;
+            font-size: 20px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        .btn:hover {
+            background-color: rgba(255, 255, 255, 0.8);
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <h1 class="head">Tic-Tac-Toe</h1>
+    <audio id="background-music"  src="sound.mp3" loop></audio>
+    <audio id="click-music" src="click.mp3"></audio>
+    <div class="container" id="container">
+        <i onclick="toggleVolume(); press();" class="fas fa-volume-xmark" id="volumeoff"></i>
+        <i onclick="toggleVolume(); press();" class="fas fa-volume-high" id="volumeon"></i>
+        <button class="btn" onclick="selectPlayers(1)">One Player</button>
+        <button class="btn" onclick="selectPlayers(2)">Two Players</button>
+    </div>
+
+    <script>
+        const audio1 = document.getElementById('click-music');
+        const audio = document.getElementById('background-music');
+        const vlmoff = document.getElementById('volumeoff');
+        const vlmon = document.getElementById('volumeon');
+
+        window.onload = function() {
+            document.body.addEventListener('click', () => {
+        audio.play();
+        localStorage.setItem('volume','on');
+    }, { once: true })
+            setTimeout(() => {
+                document.getElementById('container').classList.add('show');
+            }, 1000);
+        };
+
+    function toggleVolume() {
+    if (audio.muted) {
+        audio.muted = false;
+        vlmon.style.display = 'block';
+        vlmoff.style.display = 'none';
+        localStorage.setItem('volume','on');
+    } else {
+        audio.muted = true;
+        vlmon.style.display = 'none';
+        vlmoff.style.display = 'block';
+        localStorage.setItem('volume','off');
+    }
+};
+  
+        function selectPlayers(players) {
+            localStorage.setItem('players', players);
+            window.location.href = 'select-grid.html';
+        }
+
+function press(){
+    audio1.play();
+}
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
